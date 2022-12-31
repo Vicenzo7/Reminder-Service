@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 
 const { PORT } = require("./config/serverConfig");
 
+const { sendBasicEmail } = require("./services/email-service");
+
 const setupAndStartServer = () => {
   const app = express();
 
@@ -11,6 +13,13 @@ const setupAndStartServer = () => {
 
   app.listen(PORT, () => {
     console.log(`Server started at ${PORT}`);
+
+    sendBasicEmail(
+      "Support from support@admin.com",
+      "deeprajm35@gmail.com",
+      "Booking confirmed",
+      "Hey Your flight journey has been confirmed"
+    );
   });
 };
 
