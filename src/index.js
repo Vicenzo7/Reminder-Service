@@ -7,12 +7,15 @@ const { PORT } = require("./config/serverConfig");
 
 const jobs = require("./util/job");
 const TicketController = require("./controllers/ticket-controller");
+const { createChannel } = require("./util/messageQueue");
 
-const setupAndStartServer = () => {
+const setupAndStartServer = async () => {
   const app = express();
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  const channel = await createChannel();
 
   app.post("/api/v1/tickets", TicketController.create);
 
