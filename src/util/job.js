@@ -1,11 +1,7 @@
 const cron = require("node-cron");
 const emailService = require("../services/email-service");
 const sender = require("../config/email-config");
-/**
- * 10:00 am
- * Every 5 minutes
- * We will check are there any pending emails which were supposed to be sent by now and is pending
- */
+
 
 const setupJobs = () => {
   cron.schedule("*/2 * * * *", async () => {
