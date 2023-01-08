@@ -50,11 +50,30 @@ const createNotification = async (data) => {
   }
 };
 
+const subscribeEvents = async (payload) => {
+  let service = payload.service;
+  let data = payload.data;
+
+  switch (service) {
+    case "CREATE_TICKET":
+      await createNotification(data);
+      break;
+
+    case "SEND_BASIC_EMAIL":
+      await sendBasicEmail(data);
+      break;
+    default:
+      console.log("No valid event received");
+      break;
+  }
+};
+
 module.exports = {
   sendBasicEmail,
   fetchPendingEmails,
   createNotification,
   updateTicket,
+  subscribeEvents,
 };
 
 /**
